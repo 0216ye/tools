@@ -1,0 +1,11 @@
+{
+  "rules": [
+    {
+      "files": [
+        "src/**/*"
+      ],
+      "naming": "lowercase-dash",
+      "level": "error"
+    }
+  ]
+}

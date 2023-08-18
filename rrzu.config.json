@@ -1,0 +1,6 @@
+{
+  "rrzuPlugins": ["components", "page"],
+  "page": {
+    "location": ["/src/pages-stage(/[\\w-]+){3}$", "/src/pages-stage/admin-merchant(/[\\w-]+){3}$"]
+  }
+}

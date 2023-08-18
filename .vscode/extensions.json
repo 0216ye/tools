@@ -1,0 +1,10 @@
+{
+  "recommendations": [
+    // "octref.vetur", vue3不需要这个插件了
+    "editorconfig.editorconfig",
+    "rvest.vs-code-prettier-eslint",
+    "dbaeumer.vscode-eslint",
+    "stylelint.vscode-stylelint",
+    "lllllllqw.jsdoc"
+  ]
+}

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>rrzuji App</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      function require() {
+        return function (css) {
+          var style = document.createElement('style');
+          style.appendChild(document.createTextNode(css));
+          document.head.appendChild(style);
+        };
+      }
+    </script>
+    <script type="module" src="/src/main.ts"></script>
+    <script type="text/javascript" src="/browser-tool/browser-version-tool.umd.js"></script>
+    <script type="text/javascript">
+      if (window.GLWidget && window.GLWidget.BrowserVersionTool) {
+        new window.GLWidget.BrowserVersionTool({
+          tips: {
+            logo: 'https://img1.rrzuji.cn/uploads/scheme/2109/02/o/xO7eiCTurzv7ubau4Swm.png',
+            url: 'https://www.rrzuji.com/',
+            copyright: '粤ICP备15081086号-1',
+            name: '人人租机',
+          },
+          support: {
+            IE: 'none',
+            EDGE: '19',
+            Firefox: '67',
+            Chrome: '63', // 安卓5以上
+            Opera: '50',
+            Safari: '11', // IOS 11以上
+            iphone: 'all',
+            android: 'all',
+            ipad: 'all',
+            Unkonwn: 'none',
+          },
+        }).checkSupport();
+      }
+    </script>
+  </body>
+</html>
