@@ -54,17 +54,6 @@ yarn deploy 的效果：
 - 使用?:来替代 undefined 类型
 - 在 class 中总是使用 private public protected 明确
 
-### 人人租机后台新框架开发注意事项
-
-- 目前使用 iframe 进行嵌入使用，跨域请求和人人租机进行通讯，逐步替换。
-- 人人租机 CORS 配置里应该包含改项目测试服域名和正式服域名。
-- 使用 eslint 和 stylelintrc 约束代码规范。
-- 使用 Typescript 编写代码，获得了更多的类型推断和提示，避免低级错误。
-- 人人租机后台中一个菜单入口对应一个 php 视图，视图里放入以下代码完成引入。
-- 新的模块改动 iframe 的 baseUrl 参数即可，其它如果没有意外可以不用修改。
-- 文件不要命名为 index，如果通过打开太多会很难区分。《为什么文件名要小写 https://www.ruanyifeng.com/blog/2017/02/filename-should-be-lowercase.html 》
-- 注意文件名要为 小写加横杆-，其他格式检查会不通过。
-
 #### vite
 
 Vite 是一个由原生 ESM 驱动的 Web 开发构建工具。在开发环境下基于浏览器原生 ES imports 开发，在生产环境下基于 Rollup 打包。vue 作者尤雨溪开发的工具。
@@ -79,26 +68,6 @@ Vite 是一个由原生 ESM 驱动的 Web 开发构建工具。在开发环境�
 
 ### 人人租机后台 php 视图
 
-```php
-<style>
-@import url(/rrzujiFrame/rrzujiFrame.css);
-</style>
-<div class="frame-wrap">
-  <iframe
-    frameborder="0"
-    id="view"
-    scrolling="yes"
-    name="rrzuji"
-  >
-  </iframe>
-</div>
-<script src="/rrzujiFrame/rrzujiFrame.js"></script>
-<script>
-  window.rrzujiFrame && window.rrzujiFrame.init({
-    baseUrl: '/freight/template/list', // 后端只需要改这个
-  });
-</script>
-```
 
 ### 如何开发测试
 
