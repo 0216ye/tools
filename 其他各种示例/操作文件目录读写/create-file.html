@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onclick="cf()">创建new-directory目录</button>
+    <button onclick="df()">删除目录new-directory</button>
+    <script>
+        async function cf() {
+            const directoryHandle = await window.showDirectoryPicker();
+            const newDirectoryHandle = await directoryHandle.getDirectoryHandle('new-directory', {
+                create: true,
+            });
+        }
+        async function df() {
+            const directoryHandle = await window.showDirectoryPicker();
+            await directoryHandle.removeEntry('new-directory');
+        }
+    </script>
+</body>
+</html>
