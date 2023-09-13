@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input id="a1" oninput="hangdleChange()"/>
+    <span id="a2"></span>
+    <div id="fileList"></div>
+    <button onclick="getTheFile()">展示所选的文件或目录</button>
+    <button onclick="writeFileFn()">写入文件</button>
+    <br>
+    <script>
+        let input =	document.getElementById('a1')
+        let span =	document.getElementById('a2')
+        let fileListEle =	document.getElementById('fileList')
+        let data = {}
+        let fileList = []
+        Object.defineProperty(data,'val',{
+            get:function(){
+                return val
+            },
+            set:function(newVal){
+                val = newVal
+                input.value = val
+                span.innerHTML = val
+            }
+        })
+        
+        function hangdleChange(){
+            data.val = input.value
+        }
+
+
+        async function getTheFile() {
+            const pickerOpts = {
+                types: [
+                {
+                    description: "Images",
+                    accept: {
+                    "image/*": [".png", ".gif", ".jpeg", ".jpg"],
+                    },
+                },
+                ],
+                excludeAcceptAllOption: true,
+                multiple: false,
+            };
+
+            const directoryHandle = await window.showDirectoryPicker();
+            // 设置配置，忽略所有图片
+            // const directoryHandle = await window.showDirectoryPicker(pickerOpts);
+            for await (const [name, handle] of directoryHandle.entries()) {
+                if (handle.kind === 'file') {
+                    const fileHandle = await directoryHandle.getFileHandle(name);
+                    fileList.push(fileHandle)
+                } else {
+                    const directoryHandle1 = await directoryHandle.getDirectoryHandle(name);
+                    fileList.push(directoryHandle1)
+                }
+            }
+
+            let str = ''
+            fileList.forEach(item => {
+                str += `<div>文件类型：${item.kind}, 文件名：${item.name}</div>`
+            })
+            fileListEle.innerHTML = str
+        }
+
+        async function writeFileFn() {
+            const fileHandle = await window.showSaveFilePicker({
+                types: [
+                    {
+                        description: 'Text files',
+                        accept: {
+                            'text/plain': ['.txt'],
+                        },
+                    },
+                ],
+            });
+
+            // 创建一个可写流
+            const writable = await fileHandle.createWritable();
+            // 写入数据
+            await writable.write(data.val);
+
+            // 关闭流
+            await writable.close();
+        }
+
+    </script>
+</body>
+</html>
